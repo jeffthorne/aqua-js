@@ -2,14 +2,14 @@
 [![Version](https://badgen.net/npm/v/@jeffthorne/aqua)](https://badgen.net/npm/v/@jeffthorne/aqua)
 [![License](https://badgen.net/npm/license/@jeffthorne/aqua)](https://badgen.net/npm/license/@jeffthorne/aqua)
 
-@jeffthorne/aqua
+aqua-js
 ====
 
-A Fantastic Javascript ES Node Module for Aqua's Container Security Platform.<br/>
+A Fantastic Javascript ES Node Module for Aqua CSP.<br/>
 Current Status: Experimental
 
 ## Installation
-yarn add @jeffthorne/aqua
+yarn add @jeffthorne/aqua<br/>
 npm i @jeffthorne/aqua
 
 ## Home
