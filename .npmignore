@@ -1,0 +1,9 @@
+/public/
+/src/
+useage.js
+webpack.config.js
+/test/
+.DS_Store
+.cache
+yarn-error.log
+.babelrc
