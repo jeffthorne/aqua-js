@@ -5,7 +5,7 @@
 aqua-js
 ====
 
-A Fantastic Javascript ES Node Module for Aqua CSP.<br/>
+A Fantastic JS ES Node Module for Aqua CSP.<br/>
 Current Status: Experimental
 
 ## Installation
