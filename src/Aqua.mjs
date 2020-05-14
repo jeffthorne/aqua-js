@@ -107,6 +107,38 @@ class Aqua{
         return registries;
     }
 
+    //List all vulnerabilities found in images
+    async allVulnerabilties({show_negligible = true, hide_base_image = false, text_search = null, 
+                             severity = null, order_by = null, page = 1, pagesize = 100, include_vpatch_info = true,
+                            image_name = null, fix_availability = true, acknowledge_status = false}) {
+      let vulns = {}
+      let params = {
+        show_negligible: show_negligible, 
+        hide_base_image: hide_base_image, 
+        text_search: text_search, 
+        severity: severity, 
+        order_by: order_by, 
+        page: page, 
+        pagesize: pagesize, 
+        include_vpatch_info: include_vpatch_info,
+        image_name: image_name, 
+        fix_availability: fix_availability, 
+        acknowledge_status: acknowledge_status
+      }
+      this.config.params = params
+
+      await this._axiosInstance.get('/v2/risks/vulnerabilities', this.config)
+        .then(response => response.data)
+        .then( data => {
+          vulns = data
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+
+        return vulns;
+    }
+
 }
 
 
