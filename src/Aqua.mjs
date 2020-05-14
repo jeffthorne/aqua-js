@@ -122,6 +122,21 @@ class Aqua {
         return vulnerabilities
     }
 
+    async listImageVulnerabilities(registry = "", repo = "", tag = "", page = "", pageSize = "") {
+        let vulnerabilities = []
+        let params = { page: page, pagesize: pageSize }
+        this.config.params = params
+        await this._axiosInstance.get(`v2/images/${registry}/${repo}/${tag}/vulnerabilities`, this.config)
+            .then(response => {
+                vulnerabilities = response.data
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        this.config.params = {}
+        return vulnerabilities
+    }
+
     // Helper functions
     getRemaining(total, pagesize) {
         let remaining = total - Number(pagesize)
