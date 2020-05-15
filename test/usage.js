@@ -10,6 +10,13 @@ const main = async() => {
     let runningContainers = await aqua.containers({})
     let dash = await aqua.dashboard({})
     let images = await aqua.listRegisteredImages({})
+
+
+
+    let resp = await aqua.listRegisteredImages({registry: 'DockerHubPrivate', page: 1, pageSize: 1000})
+
+
+
 }
 
 main()

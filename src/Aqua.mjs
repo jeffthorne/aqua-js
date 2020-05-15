@@ -75,9 +75,17 @@ class Aqua{
 
     async listRegisteredImages({registry = null, repository = null, name = null, page = 1, pageSize = 50, orderBy = null}){
         let registeredImages = []
-        let params = { registry, repository, name, page, page_size: pageSize, order_by: orderBy }
+        let params = { 
+          registry:registry, 
+          repository:repository, 
+          name:name, 
+          page:page, 
+          page_size: 
+          pageSize, 
+          order_by: orderBy }
+          this.config.params = params
 
-        await this._axiosInstance.get('/v2/images', this.config, params)
+        await this._axiosInstance.get('/v2/images', this.config)
         .then(response => {
           registeredImages = response.data
         })
@@ -85,6 +93,7 @@ class Aqua{
           console.log(error)
         });
 
+        this.config.params = {}
         return registeredImages
 
     }
