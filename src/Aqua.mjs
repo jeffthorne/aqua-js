@@ -50,15 +50,15 @@ class Aqua{
     };
 
 
-    async containers(nodeId = "", groupBy = 'containers', status = 'running', page = '1', pageSize = '50'){
+    async containers({nodeId = "", groupBy = 'containers', status = 'running', page = '1', pageSize = '50'}){
       let containers = []
 
       await this._axiosInstance.get('/v1/containers', this.config, {
-        nodeId,
-        groupBy,
-        status,
-        page,
-        pageSize
+        nodeId: nodeId,
+        groupBy: groupBy,
+        status: status,
+        page: page,
+        pageSize: pageSize
       })
       .then(response => {
         containers = response.data

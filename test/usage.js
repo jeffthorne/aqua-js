@@ -7,6 +7,9 @@ const main = async() =>{
     let registries = await aqua.listRegistries()
     let vulns = await aqua.vulnerabilities({image_name: 'jeffthorne/books:latest'})
     let allVulns = await aqua.vulnerabilities({})
+
+    let runningContainers = await aqua.containers({})
+
 }
 
 main()
