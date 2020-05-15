@@ -1,6 +1,6 @@
 {
     "name": "@jeffthorne/aqua",
-    "version": "0.0.2d",
+    "version": "0.0.2e",
     "description": "",
     "main": "src/Aqua.mjs",
     "scripts": {

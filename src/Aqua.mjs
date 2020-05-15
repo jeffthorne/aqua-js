@@ -52,14 +52,15 @@ class Aqua{
 
     async containers({nodeId = "", groupBy = 'containers', status = 'running', page = '1', pageSize = '50'}){
       let containers = []
-
-      await this._axiosInstance.get('/v1/containers', this.config, {
+      let params = {
         nodeId: nodeId,
         groupBy: groupBy,
         status: status,
         page: page,
         pageSize: pageSize
-      })
+      }
+
+      await this._axiosInstance.get('/v1/containers', {...this.config, params} )
       .then(response => {
         containers = response.data
       })
@@ -83,9 +84,8 @@ class Aqua{
           page_size: 
           pageSize, 
           order_by: orderBy }
-          this.config.params = params
 
-        await this._axiosInstance.get('/v2/images', this.config)
+        await this._axiosInstance.get('/v2/images', {...this.config, params})
         .then(response => {
           registeredImages = response.data
         })
@@ -93,7 +93,6 @@ class Aqua{
           console.log(error)
         });
 
-        this.config.params = {}
         return registeredImages
 
     }
@@ -133,7 +132,7 @@ class Aqua{
         acknowledge_status: acknowledge_status
       }
 
-      await this._axiosInstance.get('/v2/risks/vulnerabilities', this.config, params)
+      await this._axiosInstance.get('/v2/risks/vulnerabilities', {...this.config, params})
         .then(response => response.data)
         .then( data => {
           vulns = data
@@ -148,13 +147,9 @@ class Aqua{
 
     async dashboard({registry =  null, hosts = null, containers_app = null}) {
       let results = []
-      let params = {
-        registry: registry,
-        hosts: hosts,
-        containers_app: containers_app
-      }
+      let params = { registry: registry, hosts: hosts, containers_app: containers_app }
 
-      await this._axiosInstance.get('/v1/dashboard', this.config, params)
+      await this._axiosInstance.get('/v1/dashboard', {...this.config, params})
         .then(response => response.data)
         .then( data => {
           results = data
