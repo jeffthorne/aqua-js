@@ -1,6 +1,8 @@
 
 [![Version](https://badgen.net/npm/v/@jeffthorne/aqua)](https://badgen.net/npm/v/@jeffthorne/aqua)
 [![License](https://badgen.net/npm/license/@jeffthorne/aqua)](https://badgen.net/npm/license/@jeffthorne/aqua)
+[![Downloads](https://badgen.net/npm/dw/@jeffthorne/aqua)](https://badgen.net/npm/dw/@jeffthorne/aqua)
+
 
 aqua-js
 ====
