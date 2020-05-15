@@ -76,9 +76,8 @@ class Aqua{
     async listRegisteredImages({registry = null, repository = null, name = null, page = 1, pageSize = 50, orderBy = null}){
         let registeredImages = []
         let params = { registry, repository, name, page, page_size: pageSize, order_by: orderBy }
-        this.config.params = params
 
-        await this._axiosInstance.get('/v2/images', this.config)
+        await this._axiosInstance.get('/v2/images', this.config, params)
         .then(response => {
           registeredImages = response.data
         })
@@ -86,7 +85,6 @@ class Aqua{
           console.log(error)
         });
 
-        this.config.params = {}
         return registeredImages
 
     }
@@ -125,9 +123,8 @@ class Aqua{
         fix_availability: fix_availability, 
         acknowledge_status: acknowledge_status
       }
-      this.config.params = params
 
-      await this._axiosInstance.get('/v2/risks/vulnerabilities', this.config)
+      await this._axiosInstance.get('/v2/risks/vulnerabilities', this.config, params)
         .then(response => response.data)
         .then( data => {
           vulns = data
@@ -138,6 +135,28 @@ class Aqua{
 
         return vulns;
     }
+
+
+    async dashboard({registry =  null, hosts = null, containers_app = null}) {
+      let results = []
+      let params = {
+        registry: registry,
+        hosts: hosts,
+        containers_app: containers_app
+      }
+
+      await this._axiosInstance.get('/v1/dashboard', this.config, params)
+        .then(response => response.data)
+        .then( data => {
+          results = data
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+
+        return results;
+    }
+    
 
 }
 
