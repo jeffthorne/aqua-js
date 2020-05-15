@@ -108,7 +108,7 @@ class Aqua{
     }
 
     //List all vulnerabilities found in images
-    async vulnerabilties({show_negligible = true, hide_base_image = false, text_search = null, 
+    async vulnerabilities({show_negligible = true, hide_base_image = false, text_search = null, 
                              severity = null, order_by = null, page = 1, pagesize = 100, include_vpatch_info = true,
                             image_name = null, fix_availability = true, acknowledge_status = false}) {
       let vulns = {}
