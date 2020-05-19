@@ -1,6 +1,6 @@
-import Aqua from '../src/Aqua.mjs';
+import Aqua from '@jeffthorne/aqua';
 
-var aqua = new Aqua('username','password', 'mylo.uw.edu')
+let aqua = new Aqua({userId: 'username', password: 'password', host: 'mylo.uw.edu'})
 
 const main = async() => {
     await aqua.init()
@@ -13,9 +13,9 @@ const main = async() => {
 
 
 
-    let resp = await aqua.listRegisteredImages({registry: 'DockerHubPrivate', page: 1, pageSize: 1000})
-    console.log(resp)
-
+    let registry = await aqua.listRegisteredImages({registry: 'DockerHubPrivate', page: 1, pageSize: 1000})
+    let infrastructure = await aqua.infrastructure({})
+ 
 
 }
 

@@ -5,7 +5,7 @@ import https from 'https'
 
 class Aqua{
 
-  constructor(userId, password, host, port = 443, useTLS = true, verifyTLS = false, apiVersion = 'v1', remember = true){
+  constructor({userId, password, host, port = 443, useTLS = true, verifyTLS = false, apiVersion = 'v1', remember = true, token = ''}){
     this.userId = userId;
     this.host = host;
     this.port = port;
@@ -13,10 +13,14 @@ class Aqua{
     this.verifyTLS = verifyTLS;
     this.apiVersion = apiVersion;
     this.remember = remember;
-    this.token = "";
+    this.token = token;
     this.baseURL = `http${useTLS ? 's' : ''}://${host}:${port}/api`
     this.config = { headers: {'Content-Type': 'application/json'}};
     this.password = password;
+
+    if(token != ''){
+     this.config.headers = {...this.config.headers, 'Authorization': `Bearer ${this.token}` }
+    }
 
 
     this._axiosInstance = axios.create({
@@ -43,8 +47,7 @@ class Aqua{
             this.config.headers =  {...this.config.headers, 'Authorization': `Bearer ${this.token}` }
           })
           .catch((error) => {
-            console.log("in error")
-            console.log(error);
+            console.log(error.response.data);
           });
           this.password = ""
     };
@@ -65,7 +68,7 @@ class Aqua{
         containers = response.data
       })
       .catch( error => {
-        console.log(error)
+        console.log(error.response.data)
       });
 
       return containers
@@ -90,7 +93,7 @@ class Aqua{
           registeredImages = response.data
         })
         .catch( error => {
-          console.log(error)
+          console.log(error.response.data)
         });
 
         return registeredImages
@@ -100,14 +103,13 @@ class Aqua{
 
     async listRegistries() {
       let registries = []
-
       await this._axiosInstance.get('/v1/registries', this.config)
         .then(response => response.data)
         .then( data => {
           registries = data
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error.response.data);
         });
 
         return registries;
@@ -138,7 +140,7 @@ class Aqua{
           vulns = data
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error.response.data);
         });
 
         return vulns;
@@ -155,14 +157,41 @@ class Aqua{
           results = data
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error.response.data);
         });
 
         return results;
     }
     
+    async infrastructure({type = 'clusters', search = null, enforced = null, scope = 'Global', orderBy = 'name', page = '1', pageSize = '50'}){
+
+      let results = []
+
+      let params = {
+        page,
+        page_size: pageSize,
+        order_by: orderBy,
+        search,
+        type,
+        enforced,
+        scope
+      }
+
+      await this._axiosInstance.get('/v2/infrastructure', {...this.config, params})
+        .then(response => response.data)
+        .then( data => {
+          results = data
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+
+        return results;
+    
+    }
 
 }
 
+ 
 
 export default Aqua;
