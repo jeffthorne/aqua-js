@@ -190,7 +190,43 @@ class Aqua{
     
     }
 
-}
+    async services({page = '1', pageSize = '50'}){
+      let results = []
+
+      let params = {
+        page,
+        page_size: pageSize,
+      }
+
+      await this._axiosInstance.get('/v1/applications', {...this.config, params})
+      .then(response => response.data )
+      .then( data => {
+        results = data
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+
+      return results
+    }
+
+    async getService(name){
+      let results = []
+
+      await this._axiosInstance.get(`/v1/applications/${name}`, this.config)
+      .then(response => response.data )
+      .then( data => {
+        results = data
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+
+      return results
+    }
+
+
+}// end Aqua class
 
  
 

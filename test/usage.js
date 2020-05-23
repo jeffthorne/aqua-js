@@ -1,5 +1,9 @@
 import Aqua from '@jeffthorne/aqua';
 
+/*
+    Early stage project. Here is sample usages. Documentation in the works.
+*/
+
 let aqua = new Aqua({userId: 'username', password: 'password', host: 'mylo.uw.edu'})
 
 const main = async() => {
@@ -15,7 +19,9 @@ const main = async() => {
 
     let registry = await aqua.listRegisteredImages({registry: 'DockerHubPrivate', page: 1, pageSize: 1000})
     let infrastructure = await aqua.infrastructure({})
- 
+
+    let services = await aqua.services({})
+    let frontend = await aqua.getService('Front End')
 
 }
 
