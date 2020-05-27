@@ -97,7 +97,6 @@ class Aqua{
       async _api({path = '', method = 'get', data = null}){
 
         let result = {}
-        console.log("DATA: ", data)
       
         let request = {
           method,
