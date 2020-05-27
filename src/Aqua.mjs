@@ -20,7 +20,7 @@ class Aqua{
       if(token != ''){
         this.config.headers = {...this.config.headers, 'Authorization': `Bearer ${this.token}` }
       }
-      
+
     }
 
       async init(){
@@ -97,6 +97,7 @@ class Aqua{
       async _api({path = '', method = 'get', data = null}){
 
         let result = {}
+        console.log("DATA: ", data)
       
         let request = {
           method,
@@ -106,22 +107,31 @@ class Aqua{
           },
           httpsAgent: new https.Agent({  
           rejectUnauthorized: this.verifyTLS
-        }),
+          }),
         }
+
+        
       
         if(this.token != null) {
           request.headers.Authorization = `Bearer ${this.token}`
         }
       
-        if(data != null){
+        if(data != null && method == 'post'){
           request.data = data
         }
-      
-      
+
+        if(data != null && method == 'get'){
+          request.params = data
+        }
+
       
         await axios(request)
-          .then(response => response.data)
-          .then(data => result = data)
+          .then(response => {
+            return response.data 
+          })
+          .then(data => {
+            result = data
+          })
           .catch((error) => {
             console.log(error);
           });

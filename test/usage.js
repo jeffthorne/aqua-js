@@ -23,6 +23,8 @@ const main = async() => {
     let services = await aqua.services({})
     let frontend = await aqua.getService('Front End')
     let risks = await aqua.risks({})
+    let clusters = await aqua.infrastructure({type: 'cluster'})
+    console.log(clusters)
 }
 
 main()
