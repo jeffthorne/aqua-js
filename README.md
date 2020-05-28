@@ -1,7 +1,7 @@
 
 [![Version](https://badgen.net/npm/v/@jeffthorne/aqua)](https://badgen.net/npm/v/@jeffthorne/aqua)
 [![License](https://badgen.net/npm/license/@jeffthorne/aqua)](https://badgen.net/npm/license/@jeffthorne/aqua)
-![npm](https://img.shields.io/npm/dm/@jeffthorne/aqua)(https://img.shields.io/npm/dm/@jeffthorne/aqua)
+![npm](https://img.shields.io/npm/dm/@jeffthorne/aqua)
 
 
 aqua-js
